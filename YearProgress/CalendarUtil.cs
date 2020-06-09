@@ -92,7 +92,9 @@ namespace YearProgress
         /// <returns></returns>
         public static int GetCurrentHourOfDay()
         {
-            return DateTime.Now.Hour - 1;
+            if (DateTime.Now.Hour == 0)
+                return 0;
+            return DateTime.Now.Hour;
         }
         /// <summary>
         /// 获取今天已经过去的分钟数
@@ -100,7 +102,7 @@ namespace YearProgress
         /// <returns></returns>
         public static int GetCurrentMinuteOfDay()
         {
-            return GetCurrentHourOfDay() * 60 + DateTime.Now.Minute - 1;
+            return GetCurrentHourOfDay() * 60 + DateTime.Now.Minute;
         }
 
         /// <summary>
@@ -109,7 +111,7 @@ namespace YearProgress
         /// <returns></returns>
         public static int GetCurrentSecondOfDay()
         {
-            return (GetCurrentHourOfDay() * 3600) + (DateTime.Now.Minute - 1) * 60 + (DateTime.Now.Second - 1);
+            return (GetCurrentHourOfDay() * 3600) + (DateTime.Now.Minute * 60) + DateTime.Now.Second;
         }
 
         /// <summary>
@@ -299,7 +301,7 @@ namespace YearProgress
                     }
                     else if(type2 == TimeValueType.HOUR) //一年经过了多少小时
                     {
-                        return GetCurrentDays() * 24 + (DateTime.Now.Hour - 1);
+                        return GetCurrentDays() * 24 + (DateTime.Now.Hour);
                     }
                     else if(type2 == TimeValueType.MINUTE) //一年经过了多少分钟
                     {
@@ -322,7 +324,7 @@ namespace YearProgress
                     }
                     else if(type2 == TimeValueType.HOUR)
                     {
-                        return (DateTime.Now.Day - 1) * 24 + (DateTime.Now.Hour - 1);
+                        return (DateTime.Now.Day - 1) * 24 + (DateTime.Now.Hour);
                     }
                     else if(type2 == TimeValueType.MINUTE)
                     {
@@ -341,15 +343,15 @@ namespace YearProgress
                 {
                     if(type2 == TimeValueType.HOUR)
                     {
-                        return DateTime.Now.Hour - 1;
+                        return DateTime.Now.Hour;
                     }
                     else if(type2 == TimeValueType.MINUTE)
                     {
-                        return (DateTime.Now.Hour - 1) * 60 + (DateTime.Now.Minute - 1);
+                        return (DateTime.Now.Hour) * 60 + (DateTime.Now.Minute);
                     }
                     else if(type2 == TimeValueType.SECOND)
                     {
-                        return (DateTime.Now.Hour - 1) * 3600 + (DateTime.Now.Minute - 1) * 60;
+                        return (DateTime.Now.Hour) * 3600 + (DateTime.Now.Minute) * 60;
                     }
                     else
                     {
@@ -360,11 +362,11 @@ namespace YearProgress
                 {
                     if(type2 == TimeValueType.MINUTE)
                     {
-                        return DateTime.Now.Minute - 1;
+                        return DateTime.Now.Minute;
                     }
                     else if(type2 == TimeValueType.SECOND)
                     {
-                        return (DateTime.Now.Minute - 1) * 60 + (DateTime.Now.Second - 1);
+                        return (DateTime.Now.Minute) * 60 + (DateTime.Now.Second);
                     }
                     else
                     {
@@ -375,7 +377,7 @@ namespace YearProgress
                 {
                     if(type2 == TimeValueType.SECOND)
                     {
-                        return DateTime.Now.Second - 1;
+                        return DateTime.Now.Second ;
                     }
                     else
                     {

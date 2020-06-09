@@ -53,9 +53,10 @@ namespace YearProgress
                         {
                             //更新小时进度条
                             int c = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.HOUR, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.CURRENT);
-                            int t = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.HOUR, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.TOTAL);
+                            int t = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.HOUR, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.TOTAL)-1;
                             progress_hour.Value = (double)c / t * 100;
                             lbl_hour.Content = Math.Round((double)c / t * 100, 2) + "%";
+                            //Debug.WriteLine("小时：" + c + "/" + t);
                         }
                     )
                 );
@@ -67,10 +68,11 @@ namespace YearProgress
                         delegate
                         {
                             //更新月份进度条
-                            int currentOfMonth = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.MONTH, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.CURRENT); ;
+                            int currentOfMonth = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.MONTH, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.CURRENT); 
                             int totalOfMonth = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.MONTH, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.TOTAL);
                             progress_month.Value = ((double)currentOfMonth / totalOfMonth) * 100;
                             lbl_month.Content = Math.Round((double)currentOfMonth / totalOfMonth * 100, 4) + "%";
+                            //Debug.WriteLine("月：" + currentOfMonth + "/" + totalOfMonth);
                         }
                     )
                 );
@@ -81,9 +83,11 @@ namespace YearProgress
                     delegate
                     {
                         //更新今天的进度条
-                        double v = CalendarUtil.GetCurrentSecondOfDay() / 86400.0;
-                        progress_today.Value = v * 100;
-                        lbl_today.Content = Math.Round(v * 100, 3)  + "%";
+                        double c = CalendarUtil.GetCurrentSecondOfDay();
+                        double t = 86400.0 - 1;
+                        double v = c / t * 100;
+                        progress_today.Value = Math.Round(v,1);
+                        lbl_today.Content = Math.Round(v, 3)  + "%";
                     }));
 
             progress_year.Dispatcher.Invoke(
@@ -92,10 +96,11 @@ namespace YearProgress
                     delegate
                     {
                         //今年的进度
-                        int year_MaxValue = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.YEAR, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.TOTAL);
+                        int year_MaxValue = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.YEAR, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.TOTAL) - 1;
                         int year_CurrentValue = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.YEAR, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.CURRENT);
                         progress_year.Value = ((double)year_CurrentValue) / year_MaxValue * 100;
                         lbl_year.Content = Math.Round((double)year_CurrentValue / year_MaxValue * 100, 5) + "%";
+                        Debug.WriteLine("年：" + year_CurrentValue + "/" + year_MaxValue);
                     }
                 ));
 
@@ -106,8 +111,9 @@ namespace YearProgress
                     delegate
                     {
                         int m = DateTime.Now.Second;
-                        progress_minute.Value = m;
-                        lbl_minute.Content = Math.Round(m / 60.0 * 100, 0) + "%";
+                        //因为从0开始，所以到59
+                        progress_minute.Value = Math.Ceiling(m / 59.0 * 100);
+                        lbl_minute.Content = Math.Round(m / 59.0 * 100, 0) + "%";
                     }));
         }
         #endregion

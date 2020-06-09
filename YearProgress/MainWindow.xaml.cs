@@ -100,7 +100,7 @@ namespace YearProgress
                         int year_CurrentValue = CalendarUtil.GetTimeValueByTimeUnit(DateTime.Now, CalendarUtil.TimeValueType.YEAR, CalendarUtil.TimeValueType.SECOND, CalendarUtil.TimeCalculationMode.CURRENT);
                         progress_year.Value = ((double)year_CurrentValue) / year_MaxValue * 100;
                         lbl_year.Content = Math.Round((double)year_CurrentValue / year_MaxValue * 100, 5) + "%";
-                        Debug.WriteLine("年：" + year_CurrentValue + "/" + year_MaxValue);
+                        //Debug.WriteLine("年：" + year_CurrentValue + "/" + year_MaxValue);
                     }
                 ));
 
@@ -120,7 +120,8 @@ namespace YearProgress
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ((MenuItem)sender).IsChecked = ((MenuItem)sender).IsChecked;
+            var item = (MenuItem)sender;
+            item.IsChecked = !item.IsChecked;
         }
     }
 }

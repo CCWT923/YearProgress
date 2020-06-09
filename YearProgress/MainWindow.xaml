@@ -7,18 +7,18 @@
         mc:Ignorable="d"
         WindowStyle="None"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Title="MainWindow" Height="100" Width="300" Name="MainWindow1"
+        Title="MainWindow" Height="134.259" Width="300" Name="MainWindow1"
         WindowChrome.WindowChrome="{DynamicResource WindowChromeKey}"
-        ShowInTaskbar="False">
-    <!-- 设置边框宽度，如果这里为0的话，那么久无法调整尺寸了 -->
+        ShowInTaskbar="False" >
+    <!-- 设置边框宽度，如果这里为0的话，那么无法调整尺寸了 -->
     <Window.Resources>
         <WindowChrome x:Key="WindowChromeKey">
             <WindowChrome.ResizeBorderThickness>
-                <Thickness>1</Thickness>
+                <Thickness>3</Thickness>
             </WindowChrome.ResizeBorderThickness>
         </WindowChrome>
     </Window.Resources>
-    
+
     <Grid Name="Grid_ProgressBar">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="Row_Year"></RowDefinition>
@@ -35,46 +35,89 @@
                     <MenuItem IsCheckable="True" IsChecked="True" Name="MenuItem_ShowDay" Header="日" Click="MenuItem_Click" />
                     <MenuItem IsCheckable="True" IsChecked="True" Name="MenuItem_ShowHour" Header="时" Click="MenuItem_Click" />
                     <MenuItem IsCheckable="True" IsChecked="True" Name="MenuItem_ShowMinute" Header="分" Click="MenuItem_Click" />
-                    <MenuItem IsCheckable="True" IsChecked="True" Name="MenuItem_ShowSecond" Header="秒" Click="MenuItem_Click" />
                 </MenuItem>
                 <MenuItem Header="设置">
                     <MenuItem Header="设置精度" />
                 </MenuItem>
+                <MenuItem Header="退出" Click="MenuItem_Click" Name="Exit" />
             </ContextMenu>
         </Grid.ContextMenu>
-        <ProgressBar Name="progress_year" MinWidth="10" Value="25" Maximum="100" Margin="0,1" />
+        <ProgressBar Name="progress_year" MinWidth="10" Value="25" Maximum="100" Margin="0,1">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush x:Name="GradientBrush_Year" StartPoint="0,0" EndPoint="300, 0" MappingMode="Absolute">
+                    <GradientStop Color="#34D800" Offset="0"></GradientStop>
+                    <GradientStop Color="#56D800" Offset="0.25"></GradientStop>
+                    <GradientStop Color="#98FF00" Offset="0.5"></GradientStop>
+                    <GradientStop Color="#FFFA00" Offset="0.75"></GradientStop>
+                    <GradientStop Color="#FF1800" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Name="lblInfo_year" FontSize = "10">年：</Label>
             <Label Name="lbl_year" FontSize = "10" ></Label>
         </StackPanel>
 
         <ProgressBar Name="progress_month" MinWidth="10" Value="50" Maximum="100"  Grid.Row="1" Margin="0,1">
-            <!--<ProgressBar.Foreground>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="100,0" MappingMode="Absolute">
-                    <GradientStop Color="#378D46" Offset="0"></GradientStop>
-                    <GradientStop Color="#FB7529" Offset="1"></GradientStop>
+            <ProgressBar.Foreground>
+                <LinearGradientBrush x:Name="GradientBrush_Month" StartPoint="0,0" EndPoint="300, 0" MappingMode="Absolute">
+                    <GradientStop Color="#34D800" Offset="0"></GradientStop>
+                    <GradientStop Color="#56D800" Offset="0.25"></GradientStop>
+                    <GradientStop Color="#98FF00" Offset="0.5"></GradientStop>
+                    <GradientStop Color="#FFFA00" Offset="0.75"></GradientStop>
+                    <GradientStop Color="#FF1800" Offset="1"></GradientStop>
                 </LinearGradientBrush>
-            </ProgressBar.Foreground>-->
+            </ProgressBar.Foreground>
         </ProgressBar>
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Name="lblInfo_month" Grid.Column="0" Grid.Row="1" FontSize = "10">月：</Label>
             <Label Name="lbl_month" Grid.Row="1" FontSize = "10" ></Label>
         </StackPanel>
 
-        <ProgressBar Name="progress_today" MinWidth="10" Grid.Row="2" Maximum="100" Margin="0,1" Value="10"/>
+        <ProgressBar Name="progress_today" MinWidth="10" Grid.Row="2" Maximum="100" Margin="0,1" Value="10">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush x:Name="GradientBrush_Day" StartPoint="0,0" EndPoint="300, 0" MappingMode="Absolute">
+                    <GradientStop Color="#34D800" Offset="0"></GradientStop>
+                    <GradientStop Color="#56D800" Offset="0.25"></GradientStop>
+                    <GradientStop Color="#98FF00" Offset="0.5"></GradientStop>
+                    <GradientStop Color="#FFFA00" Offset="0.75"></GradientStop>
+                    <GradientStop Color="#FF1800" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Name="lblInfo_today" Grid.Row="2" FontSize = "10">日：</Label>
             <Label Name="lbl_today" Grid.Row="2" FontSize = "10" ></Label>
 
         </StackPanel>
 
-        <ProgressBar Name="progress_hour" Maximum="100" Value="10" MinWidth="10" Grid.Row="3" Margin="0,1" />
+        <ProgressBar Name="progress_hour" Maximum="100" Value="10" MinWidth="10" Grid.Row="3" Margin="0,1">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush x:Name="GradientBrush_Hour" StartPoint="0,0" EndPoint="300, 0" MappingMode="Absolute">
+                    <GradientStop Color="#34D800" Offset="0"></GradientStop>
+                    <GradientStop Color="#56D800" Offset="0.25"></GradientStop>
+                    <GradientStop Color="#98FF00" Offset="0.5"></GradientStop>
+                    <GradientStop Color="#FFFA00" Offset="0.75"></GradientStop>
+                    <GradientStop Color="#FF1800" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
         <StackPanel Name="StackPanel_HourInfo" Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Name="lblInfo_hour" Grid.Row="3" FontSize = "10" >时：</Label>
             <Label Name="lbl_hour" Grid.Row="3" FontSize = "10" ></Label>
         </StackPanel>
 
-        <ProgressBar Name="progress_minute" Maximum="100" Value="10" MinWidth="10" Grid.Row="4" Margin="0,1" />
+        <ProgressBar Name="progress_minute" Maximum="100" Value="56" MinWidth="10" Grid.Row="4" Margin="0,1" SizeChanged="Element_SizeChanged">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush x:Name="GradientBrush_Minute" StartPoint="0,0" EndPoint="300, 0" MappingMode="Absolute">
+                    <GradientStop Color="#34D800" Offset="0"></GradientStop>
+                    <GradientStop Color="#56D800" Offset="0.25"></GradientStop>
+                    <GradientStop Color="#98FF00" Offset="0.5"></GradientStop>
+                    <GradientStop Color="#FFFA00" Offset="0.75"></GradientStop>
+                    <GradientStop Color="#FF1800" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
         <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Name="lblInfo_minute" Grid.Row="4" Grid.Column="0" FontSize = "10" >分：</Label>
             <Label Name="lbl_minute" Grid.Row="4"  FontSize = "10" ></Label>

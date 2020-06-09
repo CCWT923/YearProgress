@@ -120,8 +120,28 @@ namespace YearProgress
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            Debug.WriteLine(sender.ToString());
             var item = (MenuItem)sender;
+            if(item.Name.ToString() == "Exit")
+            {
+                this.Close();
+            }
             item.IsChecked = !item.IsChecked;
+        }
+
+        /// <summary>
+        /// 尺寸更改事件，调整渐变终点的位置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Element_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Point p = new Point(Width, 0);
+            GradientBrush_Minute.EndPoint = p;
+            GradientBrush_Day.EndPoint = p;
+            GradientBrush_Hour.EndPoint = p;
+            GradientBrush_Month.EndPoint = p;
+            GradientBrush_Year.EndPoint = p;
         }
     }
 }

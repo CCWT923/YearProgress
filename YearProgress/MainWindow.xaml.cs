@@ -28,11 +28,21 @@ namespace YearProgress
         #region 窗口可拖动
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //可拖动
+            //可拖动，直接调用方法
             this.DragMove();
+            
+        }
+
+
+        private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
+        {
+            WindowLoaded = true;
         }
         #endregion
-
+        /// <summary>
+        /// 是否已经完成初始化
+        /// </summary>
+        bool WindowLoaded = false;
 
         private int floatPoint = 8;
 
@@ -118,16 +128,6 @@ namespace YearProgress
         }
         #endregion
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine(sender.ToString());
-            var item = (MenuItem)sender;
-            if(item.Name.ToString() == "Exit")
-            {
-                this.Close();
-            }
-            item.IsChecked = !item.IsChecked;
-        }
 
         /// <summary>
         /// 尺寸更改事件，调整渐变终点的位置
@@ -142,6 +142,80 @@ namespace YearProgress
             GradientBrush_Hour.EndPoint = p;
             GradientBrush_Month.EndPoint = p;
             GradientBrush_Year.EndPoint = p;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var menu = (MenuItem)sender;
+            string n = menu.Name;
+            switch (n)
+            {
+                case "Exit":
+                    this.Close();
+                    break;
+                case "MenuItem_ShowYear":
+                    if (menu.IsChecked)
+                    {
+                        progress_year.Visibility = Visibility.Visible;
+                        Panel_YearInfo.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        progress_year.Visibility = Visibility.Collapsed;
+                        Panel_YearInfo.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case "MenuItem_ShowMonth":
+                    if (menu.IsChecked)
+                    {
+                        progress_month.Visibility = Visibility.Visible;
+                        Panel_MonthInfo.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        progress_month.Visibility = Visibility.Collapsed;
+                        Panel_MonthInfo.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case "MenuItem_ShowDay":
+                    if (menu.IsChecked)
+                    {
+                        progress_today.Visibility = Visibility.Visible;
+                        Panel_DayInfo.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        progress_today.Visibility = Visibility.Collapsed;
+                        Panel_DayInfo.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case "MenuItem_ShowHour":
+                    if (menu.IsChecked)
+                    {
+                        progress_hour.Visibility = Visibility.Visible;
+                        Panel_HourInfo.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        progress_hour.Visibility = Visibility.Collapsed;
+                        Panel_HourInfo.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case "MenuItem_ShowMinute":
+                    if (menu.IsChecked)
+                    {
+                        progress_minute.Visibility = Visibility.Visible;
+                        Panel_MinuteInfo.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        progress_minute.Visibility = Visibility.Collapsed;
+                        Panel_MinuteInfo.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
